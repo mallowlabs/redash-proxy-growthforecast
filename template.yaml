@@ -1,0 +1,58 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+    redash-proxy-growthforecast
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+    Function:
+        Timeout: 30
+
+Parameters:
+    GrowthForecastRoot:
+        Type: String
+        Default: https://your-growth-forecast
+    GrowthForecastUsername:
+        Type: String
+        Default: your-growth-forecast-username
+    GrowthForecastPassword:
+        Type: String
+        Default: your-growth-forecast-password
+    TimeZone:
+        Type: String
+        Default: Asia/Tokyo
+
+Resources:
+
+    RedashProxyGrowthForecastFunction:
+        Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+        Properties:
+            CodeUri: redash-proxy-growthforecast/
+            Handler: app.lambda_handler
+            Runtime: ruby2.5
+            Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
+                Variables:
+                    GROWTH_FORECAST_ROOT: !Ref GrowthForecastRoot
+                    GROWTH_FORECAST_USERNAME: !Ref GrowthForecastUsername
+                    GROWTH_FORECAST_PASSWORD: !Ref GrowthForecastPassword
+                    TZ: !Ref TimeZone
+            Events:
+                RedashProxyGrowthForecast:
+                    Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+                    Properties:
+                        Path: /proxy/{service_name}/{section_name}/{graph_name}
+                        Method: get
+
+Outputs:
+
+    RedashProxyGrowthForecastApi:
+      Description: "API Gateway endpoint URL for Prod stage for Redash Proxy GrowthForecast function"
+      Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/proxy/{service_name}/{section_name}/{graph_name}"
+
+    RedashProxyGrowthForecastFunction:
+      Description: "Redash Proxy GrowthForecast Lambda Function ARN"
+      Value: !GetAtt RedashProxyGrowthForecastFunction.Arn
+
+    RedashProxyGrowthForecastFunctionIamRole:
+      Description: "Implicit IAM Role created for Redash Proxy GrowthForecast function"
+      Value: !GetAtt RedashProxyGrowthForecastFunctionRole.Arn
