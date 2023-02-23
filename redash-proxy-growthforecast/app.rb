@@ -40,7 +40,7 @@ def lambda_handler(event:, context:)
 end
 
 def auth?(event, growth_forecast_username, growth_forecast_password)
-  authorization =  event['headers']['Authorization'] || ''
+  authorization = event['headers']['Authorization'] || ''
   authorization.gsub(/Basic\s+/, '').strip ==
     Base64.encode64("#{growth_forecast_username}:#{growth_forecast_password}").strip
 end

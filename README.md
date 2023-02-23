@@ -16,7 +16,7 @@ $ aws s3 mb s3://your-sandbox --region ap-northeast-1
 
 ```bash
 $ cd redash-proxy-growthforecast
-$ bundle
+$ bundle --path vendor/bundle --without test
 ```
 
 ```bash
