@@ -47,12 +47,12 @@ $ aws cloudformation describe-stacks --stack-name your-redash-proxy-growthforeca
 
 Add `URL Data source`.
 
-`Name`: Input friendly name.
-`URL base path`: Input your endpoint url. ex: `https://your.execute-api.ap-northeast-1.amazonaws.com/Prod/proxy/`
-`HTTP Basic Auth Username`: Input your GrwothForecast username (Basic Auth).
-`HTTP Basic Auth Password`: Input your GrwothForecast password (Basic Auth).
+* `Name`: Input friendly name.
+* `URL base path`: Input your endpoint url. ex: `https://your.execute-api.ap-northeast-1.amazonaws.com/Prod/proxy/`
+* `HTTP Basic Auth Username`: Input your GrwothForecast username (Basic Auth).
+* `HTTP Basic Auth Password`: Input your GrwothForecast password (Basic Auth).
 
-Adde `Query`.
+Add `Query`.
 
 Input `{service_name}/{section_name}/{graph_name}`.
 You can use query parameter. ex: `?t=y`.
