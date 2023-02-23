@@ -17,3 +17,5 @@ jobs:
         working-directory: ./redash-proxy-growthforecast
       - run: bundle exec ruby tests/unit/test_handler.rb
         working-directory: ./redash-proxy-growthforecast
+        env:
+          TZ: "Asia/Tokyo"
