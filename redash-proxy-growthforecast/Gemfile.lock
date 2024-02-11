@@ -28,7 +28,7 @@ GEM
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     mini_mime (1.1.2)
-    minitest (5.21.2)
+    minitest (5.22.2)
     multi_xml (0.6.0)
     mutex_m (0.2.0)
     public_suffix (5.0.3)
