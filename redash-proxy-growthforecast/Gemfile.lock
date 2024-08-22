@@ -32,7 +32,7 @@ GEM
       concurrent-ruby (~> 1.0)
     logger (1.6.0)
     mini_mime (1.1.5)
-    minitest (5.25.0)
+    minitest (5.25.1)
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
     public_suffix (5.0.5)
