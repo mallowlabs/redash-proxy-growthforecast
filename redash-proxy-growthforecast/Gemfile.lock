@@ -36,7 +36,7 @@ GEM
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
     public_suffix (5.0.5)
-    rexml (3.3.4)
+    rexml (3.3.6)
       strscan
     securerandom (0.3.1)
     strscan (3.1.0)
