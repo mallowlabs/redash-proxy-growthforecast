@@ -24,10 +24,10 @@ GEM
     crack (1.0.0)
       bigdecimal
       rexml
-    csv (3.3.0)
+    csv (3.3.3)
     drb (2.2.1)
     hashdiff (1.1.2)
-    httparty (0.22.0)
+    httparty (0.23.0)
       csv
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
