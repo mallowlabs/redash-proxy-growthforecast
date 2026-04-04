@@ -13,7 +13,9 @@ jobs:
         with:
           bundler-cache: true
           working-directory: ./redash-proxy-growthforecast
-      - run: bundle install --jobs 4 --retry 3 --path vendor/bundle
+      - run: bundle install --jobs 4 --retry 3
+        env:
+          BUNDLE_PATH: vendor/bundle
         working-directory: ./redash-proxy-growthforecast
       - run: bundle exec ruby tests/unit/test_handler.rb
         working-directory: ./redash-proxy-growthforecast
