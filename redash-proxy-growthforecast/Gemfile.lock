@@ -3,6 +3,7 @@ GEM
   specs:
     addressable (2.8.9)
       public_suffix (>= 2.0.2, < 8.0)
+    base64 (0.3.0)
     bigdecimal (4.0.1)
     crack (1.0.1)
       bigdecimal
@@ -32,6 +33,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  base64
   httparty
   minitest
   webmock
