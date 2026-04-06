@@ -75,4 +75,39 @@ class AppTest < Minitest::Test
     assert_equal(expected_result, lambda_handler(event: e, context: ''))
   end
 
+  def test_with_query_params
+    ENV['GROWTH_FORECAST_ROOT'] = 'http://localhost:5125'
+    ENV['GROWTH_FORECAST_USERNAME'] = 'user'
+    ENV['GROWTH_FORECAST_PASSWORD'] = 'password'
+
+    e = {
+      'headers' => {
+        'Authorization' => 'Basic dXNlcjpwYXNzd29yZA=='
+      },
+      'pathParameters' => {
+        'service_name' =>'service',
+        'section_name' => 'section',
+        'graph_name' => 'graph',
+      },
+      'queryStringParameters' => {
+        't' => '1h',
+        'width' => '500'
+      }
+    }
+
+    stub_request(:get, 'http://localhost:5125/xport/service/section/graph?t=1h&width=500').
+      to_return(status: 200, body: {
+        "column_names" => ["graph"],
+        "rows" => [[10]],
+        "step" => 600,
+        "columns" => 1,
+        "start_timestamp" => 1677037800,
+        "end_timestamp" => 1677156600
+      }.to_json, headers: { }
+    )
+
+    response = lambda_handler(event: e, context: '')
+    assert_equal(200, response[:statusCode])
+  end
+
 end

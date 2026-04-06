@@ -1,8 +1,7 @@
 require 'httparty'
-require 'active_support'
-require 'active_support/core_ext'
 require 'json'
 require 'base64'
+require 'uri'
 
 def lambda_handler(event:, context:)
   growth_forecast_root = ENV['GROWTH_FORECAST_ROOT']
@@ -23,7 +22,7 @@ def lambda_handler(event:, context:)
     section_name = event['pathParameters']['section_name']
     graph_name = event['pathParameters']['graph_name']
     query = event['queryStringParameters'] || {}
-    url = "#{growth_forecast_root}/xport/#{service_name}/#{section_name}/#{graph_name}?#{query.to_query}"
+    url = "#{growth_forecast_root}/xport/#{service_name}/#{section_name}/#{graph_name}?#{URI.encode_www_form(query)}"
 
     response = HTTParty.get(url, {basic_auth: {username: growth_forecast_username, password: growth_forecast_password}})
 
